@@ -131,10 +131,14 @@ class HBNBCommand(cmd.Cmd):
                 key, value = param.split("=")
                 if value.startswith('"') and value.endswith('"'):
                     value = value[1:-1]
-                if '_' in value:
-                    value = value.replace('_', ' ')
-                if '.' in value:
+                    if '_' in value:
+                        value = value.replace('_', ' ')
+                    if '"' in value:
+                        value = value.replace('"', '\\"')
+                elif '.' in value:
                     value = float(value)
+                else:
+                    value = int(value)
                 setattr(new_instance, key, value)
         storage.save()
         print(new_instance.id)

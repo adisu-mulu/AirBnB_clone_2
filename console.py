@@ -10,7 +10,7 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
-
+import os
 
 class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
@@ -140,9 +140,9 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     value = int(value)
                 setattr(new_instance, key, value)
-        storage.save()
+        
+        new_instance.save()
         print(new_instance.id)
-        storage.save()
 
     def help_create(self):
         """ Help information for the create method """
@@ -224,12 +224,22 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
-                if k.split('.')[0] == args:
-                    print_list.append(str(v))
+            if os.getenv('HBNB_TYPE_STORAGE') == 'db':
+                for k, v in storage.all(args).items():
+                    if k.split('.')[0] == args:
+                        print_list.append(str(v))
+            else:
+                for k, v in storage._FileStorage__objects.items():
+                    if k.split('.')[0] == args:
+                        print_list.append(str(v))
         else:
-            for k, v in storage._FileStorage__objects.items():
-                print_list.append(str(v))
+            if os.getenv('HBNB_TYPE_STORAGE') == 'db':
+                for k, v in storage.all().items():
+                    if k.split('.')[0] == args:
+                        print_list.append(str(v))
+            else:           
+                 for k, v in storage._FileStorage__objects.items():
+                     print_list.append(str(v))
 
         print(print_list)
 

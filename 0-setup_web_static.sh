@@ -15,8 +15,14 @@ fi
 if [ ! -d "/data/web_static/shared" ]; then
     sudo mkdir -p /data/web_static/shared
 fi
-echo "This is a test" | sudo tee /data/web_static/releases/test/index.html
+echo "checking...done" | sudo tee /data/web_static/releases/test/index.html
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 sudo chown -hR ubuntu:ubuntu /data/
-sudo sed -i '38i\\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n' /etc/nginx/sites-available/default
+
+
+# Use sed to find the end of the /redirect_me block and insert the new location block after it
+sudo sed -i '/server_name _;/a \
+     location /hbnb_static {\
+     	    alias \/data\/web_static\/current;\
+      }' /etc/nginx/sites-available/default
 sudo service nginx start

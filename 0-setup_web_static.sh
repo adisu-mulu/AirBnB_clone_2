@@ -21,8 +21,5 @@ sudo chown -hR ubuntu:ubuntu /data/
 
 
 # Use sed to find the end of the /redirect_me block and insert the new location block after it
-sudo sed -i '/server_name _;/a \
-     location /hbnb_static {\
-     	    alias \/data\/web_static\/current;\
-      }' /etc/nginx/sites-available/default
+sudo sed -i '/server_name _;/a   location /hbnb_static {   alias /data/web_static\/current;}' /etc/nginx/sites-available/default
 sudo service nginx start

@@ -25,7 +25,7 @@ def HBNB_text(text):
 
 @app.route('/python', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
-def HBNB_python(text='cool'):
+def HBNB_python(text='is cool'):
     """displaying variable rules with optional default value"""
     return 'Python ' + text.replace('_', ' ')
 

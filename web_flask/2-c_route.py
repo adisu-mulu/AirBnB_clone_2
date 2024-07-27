@@ -17,10 +17,10 @@ def HBNB():
     return "HBNB"
 
 
-@app.route('/c/<text>')
+@app.route('/c/<text>', strict_slashes=False)
 def HBNB_text(text):
     """displaying variable rules"""
-    return f'C {escape(text)}'
+    return 'C '+ text.replace('_',' ')
 
 
 if __name__ == '__main__':

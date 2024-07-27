@@ -49,7 +49,7 @@ def numbersandevenness(n):
         evenness = 'even'
     else:
         evenness = 'odd'
-        return render_template('6-number_odd_or_even.html', n=n,
+    return render_template('6-number_odd_or_even.html', n=n,
                                evenness=evenness)
 
 

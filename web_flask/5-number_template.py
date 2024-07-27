@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """This module defines a flask instance """
-from flask import Flask
+from flask import Flask, render_template
 from markupsafe import escape
 app = Flask(__name__)
 

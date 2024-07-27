@@ -9,6 +9,7 @@ def hello_HBNB():
     """Function to be called on the route /"""
     return "Hello HBNB!"
 
+
 @app.route("/hbnb", strict_slashes=False)
 def HBNB():
     """function to be called on the /hbnb"""
